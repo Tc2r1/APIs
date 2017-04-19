@@ -1,7 +1,7 @@
 # **Open Movie Database Example App**
 ## A simple Android client for Open Movie DB in Material Design.
 
-*This project is an Android app which displays data from [The Movie Database API](http://api.themoviedb.org).*
+*This project is an Android app which displays data from [OPEN Movie Database API](http://www.omdbapi.com/).*
 
 **Goals**
 
