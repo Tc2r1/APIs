@@ -1,0 +1,31 @@
+<resources>
+
+
+    <style name="TcMaterialTheme" parent="AppTheme">
+
+    </style>
+
+    <style name="MyActionBarTheme" parent="Theme.AppCompat.Light">
+        <item name="android:textColorPrimary">#fa0</item>
+        <item name="android:textColorSecondary">#fa0</item>
+    </style>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="displayOptions">disableHome</item>
+    </style>
+
+    <style name="textStyle" parent="TcMaterialTheme">
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingLeft">5dp</item>
+    </style>
+
+</resources>
