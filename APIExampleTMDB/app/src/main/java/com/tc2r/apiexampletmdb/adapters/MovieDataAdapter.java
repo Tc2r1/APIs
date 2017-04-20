@@ -111,7 +111,6 @@ public class MovieDataAdapter extends RecyclerView.Adapter<MovieDataAdapter.View
 			MovieLookupAPI.Factory.getInstance().getMovieDetails(currentObject.getiD()).enqueue(new retrofit2.Callback<MovieModel>() {
 				@Override
 				public void onResponse(Call<MovieModel> call, Response<MovieModel> response) {
-					checkJson(currentObject, response);
 					//Log.i("TEST", new GsonBuilder().setPrettyPrinting().create().toJson(response.body().getImdb_Id()));
 
 					final MovieModel tempMovie = response.body();
@@ -119,8 +118,8 @@ public class MovieDataAdapter extends RecyclerView.Adapter<MovieDataAdapter.View
 					currentObject.setAdult(tempMovie.isAdult());
 					// Genres
 					StringBuilder builder = new StringBuilder();
-					for(int i = 0; i<tempMovie.getGenres().size(); i++){
-						builder.append(tempMovie.getGenres().get(i).getName() +" ");
+					for (int i = 0; i < tempMovie.getGenres().size(); i++) {
+						builder.append(tempMovie.getGenres().get(i).getName() + " ");
 					}
 					currentObject.setGenres(builder.toString());
 					currentObject.setImdbID(tempMovie.getImdb_Id());
@@ -130,7 +129,7 @@ public class MovieDataAdapter extends RecyclerView.Adapter<MovieDataAdapter.View
 					currentObject.setVoteCount(tempMovie.getVote_count());
 
 					// Get Backdrop Url and Build it
-					if (currentObject.getBackDropURL() == null){
+					if (currentObject.getBackDropURL() == null) {
 						currentObject.setBackDropURL("https://image.tmdb.org/t/p/w780" + tempMovie.getBackdrop_path());
 					}
 					// Load images with Picasso, if backdrops are loaded, change text bar color to match
@@ -168,6 +167,7 @@ public class MovieDataAdapter extends RecyclerView.Adapter<MovieDataAdapter.View
 					} else {
 					}
 				}
+
 				@Override
 				public void onFailure(Call<MovieModel> call, Throwable t) {
 					Log.e(TAG, "FAILED" + t.getMessage());
@@ -204,25 +204,8 @@ public class MovieDataAdapter extends RecyclerView.Adapter<MovieDataAdapter.View
 				posterIV.setImageResource(R.drawable.placeholder);
 			}
 		}
-
-		// Log checks for pulled information
-		private void checkJson(MovieData currentObject, Response<MovieModel> response) {
-			Log.i("Movie ", "ID: " + currentObject.getPosterImage());
-			Log.i("Movie ", " title: " + response.body().getTitle());
-			Log.i("Videos Array Size: ", String.valueOf(response.body().getVideos().getResults().size()));
-			for (int i = 0; i < response.body().getVideos().getResults().size(); i++) {
-				Log.i(response.body().getTitle(), response.body().getVideos().getResults().get(i).getKey());
-			}
-			Log.i("Posters Array Size: ", String.valueOf(response.body().getImages().getPosters().size()));
-			for (int i = 0; i < response.body().getImages().getPosters().size(); i++) {
-				Log.i(response.body().getTitle(), response.body().getImages().getPosters().get(i).getFile_path());
-			}
-			Log.i("Backdrops Array Size: ", String.valueOf(response.body().getImages().getBackdrops().size()));
-			for (int i = 0; i < response.body().getImages().getBackdrops().size(); i++) {
-				Log.i(response.body().getTitle(), response.body().getImages().getBackdrops().get(i).getFilePath());
-			}
-		}
 	}
+
 	private void paintTextBackground(final LinearLayout movieBgLayout, ImageView posterIV) {
 		// ON FINISH/RESULT, CHANGE THE BG OF THE COLOR OF THE LAYOUT UNDERNEATH!
 		BitmapDrawable drawable = ((BitmapDrawable) posterIV.getDrawable());
