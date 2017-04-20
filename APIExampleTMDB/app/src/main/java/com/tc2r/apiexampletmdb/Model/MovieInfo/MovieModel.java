@@ -1,5 +1,7 @@
 package com.tc2r.apiexampletmdb.Model.MovieInfo;
 
+import android.util.Log;
+
 import java.util.List;
 
 /**
@@ -10,21 +12,31 @@ import java.util.List;
 
 public class MovieModel {
 	private boolean adult;
-	private String backdropPath;
+	private String backdrop_path;
 	private List<Genre> genres = null;
 	private String homepage;
 	private int id;
-	private String imdbId;
+
+	private String imdb_id;
 	private String overview;
-	private double popularity;
-	private String posterPath;
-	private String releaseDate;
+	private String poster_path;
+	private String release_date;
 	private int runtime;
 	private String tagline;
 	private String title;
-	private double voteAverage;
+	private double vote_average;
+	private int vote_count;
 	private Videos videos;
 	private Images images;
+	private String status;
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	public boolean isAdult() {
 		return adult;
@@ -34,12 +46,12 @@ public class MovieModel {
 		this.adult = adult;
 	}
 
-	public String getBackdropPath() {
-		return backdropPath;
+	public String getBackdrop_path() {
+		return backdrop_path;
 	}
 
-	public void setBackdropPath(String backdropPath) {
-		this.backdropPath = backdropPath;
+	public void setBackdrop_path(String backdrop_path) {
+		this.backdrop_path = backdrop_path;
 	}
 
 	public List<Genre> getGenres() {
@@ -58,6 +70,14 @@ public class MovieModel {
 		this.homepage = homepage;
 	}
 
+	public int getVote_count() {
+		return vote_count;
+	}
+
+	public void setVote_count(int vote_count) {
+		this.vote_count = vote_count;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -66,12 +86,12 @@ public class MovieModel {
 		this.id = id;
 	}
 
-	public String getImdbId() {
-		return imdbId;
+	public String getImdb_Id() {
+		return imdb_id;
 	}
 
-	public void setImdbId(String imdbId) {
-		this.imdbId = imdbId;
+	public void setImdb_id(String imdb_id) {
+		this.imdb_id = imdb_id;
 	}
 
 	public String getOverview() {
@@ -82,28 +102,20 @@ public class MovieModel {
 		this.overview = overview;
 	}
 
-	public double getPopularity() {
-		return popularity;
+	public String getPoster_path() {
+		return poster_path;
 	}
 
-	public void setPopularity(double popularity) {
-		this.popularity = popularity;
+	public void setPoster_path(String poster_path) {
+		this.poster_path = poster_path;
 	}
 
-	public String getPosterPath() {
-		return posterPath;
+	public String getRelease_date() {
+		return release_date;
 	}
 
-	public void setPosterPath(String posterPath) {
-		this.posterPath = posterPath;
-	}
-
-	public String getReleaseDate() {
-		return releaseDate;
-	}
-
-	public void setReleaseDate(String releaseDate) {
-		this.releaseDate = releaseDate;
+	public void setRelease_date(String release_date) {
+		this.release_date = release_date;
 	}
 
 	public int getRuntime() {
@@ -130,12 +142,12 @@ public class MovieModel {
 		this.title = title;
 	}
 
-	public double getVoteAverage() {
-		return voteAverage;
+	public double getVote_average() {
+		return vote_average;
 	}
 
-	public void setVoteAverage(double voteAverage) {
-		this.voteAverage = voteAverage;
+	public void setVote_average(double vote_average) {
+		this.vote_average = vote_average;
 	}
 
 	public Videos getVideos() {

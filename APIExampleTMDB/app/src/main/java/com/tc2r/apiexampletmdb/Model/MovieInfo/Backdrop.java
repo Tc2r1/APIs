@@ -8,67 +8,40 @@ package com.tc2r.apiexampletmdb.Model.MovieInfo;
 
 public class Backdrop {
 
-		private double aspectRatio;
-		private String filePath;
-		private int height;
-		private Object iso6391;
-		private int voteAverage;
-		private int voteCount;
-		private int width;
+	private double aspect_ratio;
+	private String file_path;
+	private int height;
+	private int width;
 
-		public double getAspectRatio() {
-			return aspectRatio;
-		}
+	public double getAspectRatio() {
+		return aspect_ratio;
+	}
 
-		public void setAspectRatio(double aspectRatio) {
-			this.aspectRatio = aspectRatio;
-		}
+	public void setAspectRatio(double aspect_ratio) {
+		this.aspect_ratio = aspect_ratio;
+	}
 
-		public String getFilePath() {
-			return filePath;
-		}
+	public String getFilePath() {
+		return file_path;
+	}
 
-		public void setFilePath(String filePath) {
-			this.filePath = filePath;
-		}
+	public void setFilePath(String file_path) {
+		this.file_path = file_path;
+	}
 
-		public int getHeight() {
-			return height;
-		}
+	public int getHeight() {
+		return height;
+	}
 
-		public void setHeight(int height) {
-			this.height = height;
-		}
+	public void setHeight(int height) {
+		this.height = height;
+	}
 
-		public Object getIso6391() {
-			return iso6391;
-		}
+	public int getWidth() {
+		return width;
+	}
 
-		public void setIso6391(Object iso6391) {
-			this.iso6391 = iso6391;
-		}
-
-		public int getVoteAverage() {
-			return voteAverage;
-		}
-
-		public void setVoteAverage(int voteAverage) {
-			this.voteAverage = voteAverage;
-		}
-
-		public int getVoteCount() {
-			return voteCount;
-		}
-
-		public void setVoteCount(int voteCount) {
-			this.voteCount = voteCount;
-		}
-
-		public int getWidth() {
-			return width;
-		}
-
-		public void setWidth(int width) {
-			this.width = width;
-		}
+	public void setWidth(int width) {
+		this.width = width;
+	}
 }

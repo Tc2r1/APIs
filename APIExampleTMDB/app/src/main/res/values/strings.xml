@@ -1,11 +1,12 @@
 <resources>
-    <string name="app_name">O.M.D.B. Browser</string>
+    <string name="app_name">T.M.D.B. Browser</string>
     <string name="imdb_link">"http://www.imdb.com/title/"</string>
     <string name="search_button">Search</string>
     <string name="toolbar_menu_search">Search</string>
     <string name="toolbar_menu_settings">Settings</string>
     <string name="search_hint">Movie...</string>
     <string name="end_of_results">End of Results</string>
+    <string name="minutes"> minutes</string>
 
     <string name="search_progress_title">Searching</string>
     <string name="search_progress_desc">Searching for titles</string>
@@ -30,6 +31,7 @@
         So as I pray, \n
         Unlimited Project Works
     </string>
+
 
 
 </resources>

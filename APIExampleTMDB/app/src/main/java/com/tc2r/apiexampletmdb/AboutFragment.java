@@ -84,25 +84,17 @@ public class AboutFragment extends Fragment {
 
 			}
 		});
-
-
-
-
-
 		// YOUR POSITION TITLE IN THE PROJECT.
 		yourTitle.setText(R.string.Team_Dre_Title);
 
-
 		// YOUR CARD NUMBER (FAVORITE NUMBER)
 		yourDesignation.setText("#23");
-
 
 		// YOUR RANK
 		yourRank.setText("SSJ");
 
 		// YOUR DESCRIPTION
 		yourDescription.setText(R.string.Team_Dre_Desc);
-
 
 		// YOUR IMAGE (PLEASE SEND ME A 664X374 IMAGE TO USE FOR YOUR CARD
 		yourImage.setImageResource(R.drawable.cardimage_dre);
@@ -117,7 +109,6 @@ public class AboutFragment extends Fragment {
 
 		return view;
 	}
-
 	public void removeSelf(){
 		getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
 	}

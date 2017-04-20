@@ -27,6 +27,7 @@ public class TMDBDataAPITask extends AsyncTask<String, Integer, String> {
 	private MainActivity activity;
 	private static MovieData currentMovie;
 	private static final String TAG = "TMDBDataAPITask";
+	private static final String MEDIA_URL ="https://image.tmdb.org/t/p/w780";
 	private int page;
 	private String totalResults;
 
@@ -103,9 +104,6 @@ public class TMDBDataAPITask extends AsyncTask<String, Integer, String> {
 			if (totalTest > 0) {
 				JSONArray movies = responseObject.getJSONArray("results");
 
-
-				Log.wtf(TAG, String.valueOf(movies.length()));
-
 				// Loop through Json array and assign values to ArrayList
 				for (int i = 0; i < movies.length(); i++) {
 
@@ -120,15 +118,32 @@ public class TMDBDataAPITask extends AsyncTask<String, Integer, String> {
 					int iD = movie.getInt("id");
 					Double voteAvg = movie.getDouble("vote_average");
 					String posterUrl = movie.getString("poster_path");
-					String backDropUrl = movie.getString("backdrop_path");
-					Log.d(TAG, String.valueOf(iD));
-					currentMovie = new MovieData(movieTitle, movieYear, 0, iD, backDropUrl, "", "", "", posterUrl, overview, adult, voteAvg);
+					String backDropUrl = null;
+
+					currentMovie = new MovieData(movieTitle,
+									movieYear,
+									"",
+									iD,
+									backDropUrl,
+									"",
+									"",
+									"",
+									"",
+									posterUrl,
+									"",
+									overview,
+									adult,
+									voteAvg,
+									0);
+
+					if (!movie.getString("backdrop_path").equalsIgnoreCase("null")){
+						backDropUrl = MEDIA_URL+ movie.getString("backdrop_path");
+					}
 
 					// Save this Movie to movieData Array.
 					moviesList.add(currentMovie);
 				}
 			}else{
-
 				switch(page){
 					case 1:
 						this.activity.alert(responseObject.getString("Error"));

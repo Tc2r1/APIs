@@ -30,7 +30,6 @@ public class TMDBHelper {
 	private static final String URL_HARD_CODE =
 					"https://api.themoviedb.org/3/search/movie?api_key=";
 	private static final String hiKddEnY = "a70bede5f34a31b5f0098fc98ccfb971";
-
 	private static final int HTTP_STATUS_OK = 200;
 	private static byte[] buff = new byte[1024];
 	private static final String TAG = "TMDBHelper";
@@ -67,7 +66,6 @@ public class TMDBHelper {
 		// Tracking User's Search Results
 		String setval = null;
 		String movieQuery = params[0];
-		Log.wtf(TAG, "PARAMS! " + String.valueOf(movieQuery));
 		int page = pageLoad;
 
 

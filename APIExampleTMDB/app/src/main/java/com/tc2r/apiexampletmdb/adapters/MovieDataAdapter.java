@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -20,6 +21,7 @@ import com.tc2r.apiexampletmdb.MainActivity;
 import com.tc2r.apiexampletmdb.Model.MovieData;
 import com.tc2r.apiexampletmdb.Model.MovieInfo.MovieModel;
 import com.tc2r.apiexampletmdb.Model.MovieInfo.Result;
+import com.tc2r.apiexampletmdb.MovieDetails;
 import com.tc2r.apiexampletmdb.R;
 import com.tc2r.apiexampletmdb.remote.MovieLookupAPI;
 
@@ -87,15 +89,12 @@ public class MovieDataAdapter extends RecyclerView.Adapter<MovieDataAdapter.View
 		@Override
 		public void onClick(View view) {
 			if (view instanceof View) {
-				// construct url
-				String imdbUrl = mainActivity.getResources().getString(R.string.imdb_link) + moviesList.get(getAdapterPosition()).getImdbID();
-				Log.d(TAG, imdbUrl);
-
-				// and send user to it.
-				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(imdbUrl));
+				Intent intent = new Intent(mainActivity, MovieDetails.class);
+				Bundle bundle = new Bundle();
+				bundle.putParcelable("CurrentMovie", moviesList.get(getAdapterPosition()));
+				intent.putExtras(bundle);
 				view.getContext().startActivity(intent);
 			}
-
 		}
 
 		public void setData(final MovieData currentObject, int position) {
@@ -113,14 +112,31 @@ public class MovieDataAdapter extends RecyclerView.Adapter<MovieDataAdapter.View
 				@Override
 				public void onResponse(Call<MovieModel> call, Response<MovieModel> response) {
 					checkJson(currentObject, response);
+					//Log.i("TEST", new GsonBuilder().setPrettyPrinting().create().toJson(response.body().getImdb_Id()));
 
-					// Get Backdrop Url
-					if (response.body().getBackdropPath() != null) {
-						currentObject.setBackDropURL("https://image.tmdb.org/t/p/w780" + response.body().getBackdropPath());
+					final MovieModel tempMovie = response.body();
+					// Set MovieData Object with detailed Items!
+					currentObject.setAdult(tempMovie.isAdult());
+					// Genres
+					StringBuilder builder = new StringBuilder();
+					for(int i = 0; i<tempMovie.getGenres().size(); i++){
+						builder.append(tempMovie.getGenres().get(i).getName() +" ");
+					}
+					currentObject.setGenres(builder.toString());
+					currentObject.setImdbID(tempMovie.getImdb_Id());
+					currentObject.setRuntime(String.valueOf(tempMovie.getRuntime()));
+					currentObject.setStatus(tempMovie.getStatus());
+					currentObject.setTagline(tempMovie.getTagline());
+					currentObject.setVoteCount(tempMovie.getVote_count());
+
+					// Get Backdrop Url and Build it
+					if (currentObject.getBackDropURL() == null){
+						currentObject.setBackDropURL("https://image.tmdb.org/t/p/w780" + tempMovie.getBackdrop_path());
 					}
 					// Load images with Picasso, if backdrops are loaded, change text bar color to match
 					// if not loaded, change text bar color to match poster image.
-					Picasso.with(mainActivity).load("https://image.tmdb.org/t/p/w780" + currentObject.getBackDropURL())
+
+					Picasso.with(mainActivity).load(currentObject.getBackDropURL())
 									.fit()
 									.centerCrop()
 									.error(R.drawable.placeholder)
@@ -132,10 +148,12 @@ public class MovieDataAdapter extends RecyclerView.Adapter<MovieDataAdapter.View
 
 										@Override
 										public void onError() {
+											Log.d(TAG, currentObject.getBackDropURL() + "not found.");
 											Picasso.with(mainActivity).load("https://image.tmdb.org/t/p/w780" + currentObject.getPosterImage())
 															.fit()
 															.centerInside()
 															.error(R.drawable.placeholder)
+															.placeholder(R.drawable.placeholder)
 															.into(backdropIV);
 											paintTextBackground(movieBgLayout, posterIV);
 
@@ -146,7 +164,7 @@ public class MovieDataAdapter extends RecyclerView.Adapter<MovieDataAdapter.View
 					List<Result> currentVideos = response.body().getVideos().getResults();
 					if (currentVideos.size() != 0) {
 						currentObject.setVideoUrl(currentVideos.get(0).getKey());
-						Log.wtf("YouTube: ", "https://www.youtube.com/watch?v=" + currentObject.getVideoUrl());
+						Log.w("YouTube: ", "https://www.youtube.com/watch?v=" + currentObject.getVideoUrl());
 					} else {
 					}
 				}
@@ -158,13 +176,22 @@ public class MovieDataAdapter extends RecyclerView.Adapter<MovieDataAdapter.View
 
 			// Check for the poster image
 			if (currentObject.getPosterImage() != null && currentObject.getPosterImage() != "null") {
+				//currentObject.setPosterImage("https://image.tmdb.org/t/p/w500" + currentObject.getPosterImage());
+
 				// poster url is found
 				posterIV.setOnClickListener(new View.OnClickListener() {
 					@Override
-					public void onClick(View v) {
+					public void onClick(View view) {
+						// construct url
+						String imdbUrl = mainActivity.getResources().getString(R.string.imdb_link) + currentObject.getImdbID();
+						Log.d(TAG, imdbUrl);
 
+						// and send user to it.
+						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(imdbUrl));
+						view.getContext().startActivity(intent);
 					}
 				});
+
 				// Load Poster Image
 				Picasso.with(mainActivity)
 								.load("https://image.tmdb.org/t/p/w500" + currentObject.getPosterImage())
@@ -180,19 +207,19 @@ public class MovieDataAdapter extends RecyclerView.Adapter<MovieDataAdapter.View
 
 		// Log checks for pulled information
 		private void checkJson(MovieData currentObject, Response<MovieModel> response) {
-			Log.wtf("Movie ", "ID: " + currentObject.getPosterImage());
-			Log.wtf("Movie ", " title: " + response.body().getTitle());
-			Log.wtf("Videos Array Size: ", String.valueOf(response.body().getVideos().getResults().size()));
+			Log.i("Movie ", "ID: " + currentObject.getPosterImage());
+			Log.i("Movie ", " title: " + response.body().getTitle());
+			Log.i("Videos Array Size: ", String.valueOf(response.body().getVideos().getResults().size()));
 			for (int i = 0; i < response.body().getVideos().getResults().size(); i++) {
-				Log.wtf(response.body().getTitle(), response.body().getVideos().getResults().get(i).getKey());
+				Log.i(response.body().getTitle(), response.body().getVideos().getResults().get(i).getKey());
 			}
-			Log.wtf("Posters Array Size: ", String.valueOf(response.body().getImages().getPosters().size()));
+			Log.i("Posters Array Size: ", String.valueOf(response.body().getImages().getPosters().size()));
 			for (int i = 0; i < response.body().getImages().getPosters().size(); i++) {
-				Log.wtf(response.body().getTitle(), response.body().getImages().getPosters().get(i).getFilePath());
+				Log.i(response.body().getTitle(), response.body().getImages().getPosters().get(i).getFile_path());
 			}
-			Log.wtf("Backdrops Array Size: ", String.valueOf(response.body().getImages().getBackdrops().size()));
+			Log.i("Backdrops Array Size: ", String.valueOf(response.body().getImages().getBackdrops().size()));
 			for (int i = 0; i < response.body().getImages().getBackdrops().size(); i++) {
-				Log.wtf(response.body().getTitle(), response.body().getImages().getBackdrops().get(i).getFilePath());
+				Log.i(response.body().getTitle(), response.body().getImages().getBackdrops().get(i).getFilePath());
 			}
 		}
 	}

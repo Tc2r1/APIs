@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
 	private CustomRecyclerViewScrollListener scrollListener;
 	private String query;
 
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -87,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
 		if (getActionBar() != null) {
 			getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 		}
-
 		//Initialing layout
 		layoutManager = new GridLayoutManager(this, 1, GridLayoutManager.VERTICAL, false);
 		movieListLayout.setLayoutManager(layoutManager);
@@ -95,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
 		movieListLayout.addItemDecoration(new GridSpacingItemDecoration(1, dpToPx(10), true));
 		movieListLayout.setItemAnimator(new DefaultItemAnimator());
 		movieListLayout.setAdapter(movieDataAdapter);
-
 
 		// Set Listeners
 
@@ -120,25 +117,25 @@ public class MainActivity extends AppCompatActivity {
 
 		// Button listener for search.
 		searchButton.setOnClickListener(new View.OnClickListener() {
-																			@Override
-																			public void onClick(View v) {
+			@Override
+			public void onClick(View v) {
 
-																				// Check for Connection
-																				if (!NetworkCheck.isNetworkAvailable(getApplicationContext())) {
-																					alert(getString(R.string.error_connecting_internet));
-																					return;
-																				}
-																				// circleReveal only works on API 14+
-																				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-																					circleReveal(R.id.searchtoolbar, 1, true, true);
-																				} else {
-																					mSearchToolbar.setVisibility(View.VISIBLE);
-																					searchButton.setVisibility(View.GONE);
-																				}
+				// Check for Connection
+				if (!NetworkCheck.isNetworkAvailable(getApplicationContext())) {
+					alert(getString(R.string.error_connecting_internet));
+					return;
+				}
+				// circleReveal only works on API 14+
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+					circleReveal(R.id.searchtoolbar, 1, true, true);
+				} else {
+					mSearchToolbar.setVisibility(View.VISIBLE);
+					searchButton.setVisibility(View.GONE);
+				}
 
-																				item_search.expandActionView();
-																			}
-																		});
+				item_search.expandActionView();
+			}
+		});
 
 		// Restore data on orientation change.
 		final Object[] data = (Object[]) getLastCustomNonConfigurationInstance();
@@ -203,7 +200,6 @@ public class MainActivity extends AppCompatActivity {
 		return myStuff;
 	}
 
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -220,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
 		switch (id) {
 			case R.id.action_search:
 				// Check for Connection
-				if(!NetworkCheck.isNetworkAvailable(getApplicationContext())) {
+				if (!NetworkCheck.isNetworkAvailable(getApplicationContext())) {
 					alert(getString(R.string.error_connecting_internet));
 					return true;
 				}
@@ -238,6 +234,7 @@ public class MainActivity extends AppCompatActivity {
 				FragmentManager fragmentManager = getSupportFragmentManager();
 				FragmentTransaction fragmentTransaction =
 								fragmentManager.beginTransaction();
+
 				fragmentTransaction.replace(android.R.id.content, new AboutFragment());
 				fragmentTransaction.commit();
 
