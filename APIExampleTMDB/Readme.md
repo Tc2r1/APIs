@@ -3,6 +3,8 @@
 
 This project is an Android app which displays data from [The Movie Database API](http://api.themoviedb.org/).
 
+[Video of App](http://i.imgur.com/rY2ZTYl.gifv)
+
 In this assignment I had to provide 3 main user features:
 **Goals**
 
