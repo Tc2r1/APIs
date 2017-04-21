@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">APIExampleGithub</string>
+    <string name="search">Search</string>
+    <string name="title">TITLE</string>
+    <string name="search_hint">Type User Name Here</string>
+    <string name="score_hint">00</string>
+</resources>

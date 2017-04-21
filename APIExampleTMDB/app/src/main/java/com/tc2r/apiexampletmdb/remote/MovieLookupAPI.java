@@ -29,11 +29,13 @@ public interface MovieLookupAPI {
 		private static MovieLookupAPI service;
 		public static MovieLookupAPI getInstance(){
 			if(service == null) {
+				// Retrofit Reference
 				Retrofit retrofit = new Retrofit.Builder()
 								.addConverterFactory(GsonConverterFactory.create())
 								.baseUrl(URL_MOVIE_MEDIA)
 								.build();
 
+				// End Points
 				service = retrofit.create(MovieLookupAPI.class);
 				return service;
 			}else{

@@ -53,6 +53,7 @@ public class MovieDataAdapter extends RecyclerView.Adapter<MovieDataAdapter.View
 		return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.movierow, parent, false));
 
 	}
+
 	@Override
 	public void onBindViewHolder(ViewHolder holder, int position) {
 		final MovieData currentObject = moviesList.get(position);
@@ -60,6 +61,7 @@ public class MovieDataAdapter extends RecyclerView.Adapter<MovieDataAdapter.View
 		// Assign date to the object.
 		holder.setData(currentObject, position);
 	}
+
 	@Override
 	public int getItemCount() {
 		return moviesList.size();
@@ -108,72 +110,75 @@ public class MovieDataAdapter extends RecyclerView.Adapter<MovieDataAdapter.View
 
 			// Call API for Data on specific Movie using Retrofit2
 			// On Successful call, save data to object.
-			MovieLookupAPI.Factory.getInstance().getMovieDetails(currentObject.getiD()).enqueue(new retrofit2.Callback<MovieModel>() {
-				@Override
-				public void onResponse(Call<MovieModel> call, Response<MovieModel> response) {
-					//Log.i("TEST", new GsonBuilder().setPrettyPrinting().create().toJson(response.body().getImdb_Id()));
+			MovieLookupAPI
+							.Factory
+							.getInstance()
+							.getMovieDetails(currentObject.getiD())
+							.enqueue(new retrofit2.Callback<MovieModel>() {
+								@Override
+								public void onResponse(Call<MovieModel> call, Response<MovieModel> response) {
+									//Log.i("TEST", new GsonBuilder().setPrettyPrinting().create().toJson(response.body().getImdb_Id()));
 
-					final MovieModel tempMovie = response.body();
-					// Set MovieData Object with detailed Items!
-					currentObject.setAdult(tempMovie.isAdult());
-					// Genres
-					StringBuilder builder = new StringBuilder();
-					for (int i = 0; i < tempMovie.getGenres().size(); i++) {
-						builder.append(tempMovie.getGenres().get(i).getName() + " ");
-					}
-					currentObject.setGenres(builder.toString());
-					currentObject.setImdbID(tempMovie.getImdb_Id());
-					currentObject.setRuntime(String.valueOf(tempMovie.getRuntime()));
-					currentObject.setStatus(tempMovie.getStatus());
-					currentObject.setTagline(tempMovie.getTagline());
-					currentObject.setVoteCount(tempMovie.getVote_count());
-
-					// Get Backdrop Url and Build it
-					if (currentObject.getBackDropURL() == null) {
-						currentObject.setBackDropURL("https://image.tmdb.org/t/p/w780" + tempMovie.getBackdrop_path());
-					}
-					// Load images with Picasso, if backdrops are loaded, change text bar color to match
-					// if not loaded, change text bar color to match poster image.
-
-					Picasso.with(mainActivity).load(currentObject.getBackDropURL())
-									.fit()
-									.centerCrop()
-									.error(R.drawable.placeholder)
-									.into(backdropIV, new Callback() {
-										@Override
-										public void onSuccess() {
-											paintTextBackground(movieBgLayout, backdropIV);
+									if (response.isSuccessful()) {
+										final MovieModel tempMovie = response.body();
+										// Set MovieData Object with detailed Items!
+										currentObject.setAdult(tempMovie.isAdult());
+										// Genres
+										StringBuilder builder = new StringBuilder();
+										for (int i = 0; i < tempMovie.getGenres().size(); i++) {
+											builder.append(tempMovie.getGenres().get(i).getName() + " ");
 										}
+										currentObject.setGenres(builder.toString());
+										currentObject.setImdbID(tempMovie.getImdb_Id());
+										currentObject.setRuntime(String.valueOf(tempMovie.getRuntime()));
+										currentObject.setStatus(tempMovie.getStatus());
+										currentObject.setTagline(tempMovie.getTagline());
+										currentObject.setVoteCount(tempMovie.getVote_count());
 
-										@Override
-										public void onError() {
-											Log.d(TAG, currentObject.getBackDropURL() + "not found.");
-											Picasso.with(mainActivity).load("https://image.tmdb.org/t/p/w780" + currentObject.getPosterImage())
-															.fit()
-															.centerInside()
-															.error(R.drawable.placeholder)
-															.placeholder(R.drawable.placeholder)
-															.into(backdropIV);
-											paintTextBackground(movieBgLayout, posterIV);
-
+										// Get Backdrop Url and Build it
+										if (currentObject.getBackDropURL() == null) {
+											currentObject.setBackDropURL("https://image.tmdb.org/t/p/w780" + tempMovie.getBackdrop_path());
 										}
-									});
+										// Load images with Picasso, if backdrops are loaded, change text bar color to match
+										// if not loaded, change text bar color to match poster image.
 
-					// Get Video Urls
-					List<Result> currentVideos = response.body().getVideos().getResults();
-					if (currentVideos.size() != 0) {
-						currentObject.setVideoUrl(currentVideos.get(0).getKey());
-						Log.w("YouTube: ", "https://www.youtube.com/watch?v=" + currentObject.getVideoUrl());
-					} else {
-					}
-				}
+										Picasso.with(mainActivity).load(currentObject.getBackDropURL())
+														.fit()
+														.centerCrop()
+														.error(R.drawable.placeholder)
+														.into(backdropIV, new Callback() {
+															@Override
+															public void onSuccess() {
+																paintTextBackground(movieBgLayout, backdropIV);
+															}
 
-				@Override
-				public void onFailure(Call<MovieModel> call, Throwable t) {
-					Log.e(TAG, "FAILED" + t.getMessage());
-				}
-			});
+															@Override
+															public void onError() {
+																Log.d(TAG, currentObject.getBackDropURL() + "not found.");
+																Picasso.with(mainActivity).load("https://image.tmdb.org/t/p/w780" + currentObject.getPosterImage())
+																				.fit()
+																				.centerInside()
+																				.error(R.drawable.placeholder)
+																				.placeholder(R.drawable.placeholder)
+																				.into(backdropIV);
+																paintTextBackground(movieBgLayout, posterIV);
 
+															}
+														});
+										// Get Video Urls
+										List<Result> currentVideos = response.body().getVideos().getResults();
+										if (currentVideos.size() != 0) {
+											currentObject.setVideoUrl(currentVideos.get(0).getKey());
+											Log.w("YouTube: ", "https://www.youtube.com/watch?v=" + currentObject.getVideoUrl());
+										}
+									}
+								}
+
+								@Override
+								public void onFailure(Call<MovieModel> call, Throwable t) {
+									Log.e(TAG, "FAILED" + t.getMessage());
+								}
+							});
 			// Check for the poster image
 			if (currentObject.getPosterImage() != null && currentObject.getPosterImage() != "null") {
 				//currentObject.setPosterImage("https://image.tmdb.org/t/p/w500" + currentObject.getPosterImage());
