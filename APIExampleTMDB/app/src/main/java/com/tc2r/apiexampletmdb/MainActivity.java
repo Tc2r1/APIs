@@ -377,7 +377,7 @@ public class MainActivity extends AppCompatActivity {
 
 		// set hint and the text colors
 		EditText txtSearch = ((EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text));
-		txtSearch.setHint(R.string.search_hint);
+		txtSearch.setHint(R.string.main_search_hint);
 		txtSearch.setHintTextColor(ContextCompat.getColor(this, R.color.textColorPrimary));
 		txtSearch.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
 

@@ -149,7 +149,7 @@ public class TMDBDataAPITask extends AsyncTask<String, Integer, String> {
 						this.activity.alert(responseObject.getString("Error"));
 						break;
 					default:
-						this.activity.alert(this.activity.getString(R.string.end_of_results));
+						this.activity.alert(this.activity.getString(R.string.all_end_results));
 						break;
 				}
 				return;

@@ -16,10 +16,10 @@
         android:layout_gravity="top"
         >
 
-        <include layout="@layout/toolbar"/>
+        <include layout="@layout/layout_toolbar"/>
 
         <include
-            layout="@layout/search_toolbar"
+            layout="@layout/layout_toolbar_search"
             android:visibility="gone"/>
 
     </RelativeLayout>
@@ -54,7 +54,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_centerInParent="true"
-                    android:src="@drawable/searchbutton"
+                    android:src="@drawable/main_searchbtn"
                     />
 
                 <android.support.v7.widget.RecyclerView

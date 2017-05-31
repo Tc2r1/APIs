@@ -30,7 +30,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="3"
                 android:scaleType="centerCrop"
-                android:src="@drawable/placeholder"/>
+                android:src="@drawable/all_placeholder"/>
 
             <LinearLayout
                 android:id="@+id/movie_text_bg"

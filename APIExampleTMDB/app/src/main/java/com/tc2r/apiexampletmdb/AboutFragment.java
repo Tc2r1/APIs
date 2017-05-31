@@ -27,7 +27,7 @@ public class AboutFragment extends Fragment {
 	@Override
 	public View onCreateView(final LayoutInflater inflater, ViewGroup container,
 													 Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.about_card_template, container, false);
+		View view = inflater.inflate(R.layout.fragment_about_card, container, false);
 		yourDescription = (TextView) view.findViewById(R.id.card_description);
 		yourTitle = (TextView) view.findViewById(R.id.card_title);
 		yourDesignation = (TextView) view.findViewById(R.id.card_designation);
@@ -97,7 +97,7 @@ public class AboutFragment extends Fragment {
 		yourDescription.setText(R.string.Team_Dre_Desc);
 
 		// YOUR IMAGE (PLEASE SEND ME A 664X374 IMAGE TO USE FOR YOUR CARD
-		yourImage.setImageResource(R.drawable.cardimage_dre);
+		yourImage.setImageResource(R.drawable.about_profileimage);
 
 		yourImage.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -105,7 +105,7 @@ public class AboutFragment extends Fragment {
 				removeSelf();
 			}
 		});
-		yourBorder.setBackgroundResource(R.drawable.text_border_about2);
+		yourBorder.setBackgroundResource(R.drawable.about_border);
 
 		return view;
 	}

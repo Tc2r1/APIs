@@ -23,8 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <include layout="@layout/toolbar"/>
-            <include layout="@layout/search_toolbar"
+            <include layout="@layout/layout_toolbar"/>
+            <include layout="@layout/layout_toolbar_search"
                      android:visibility="gone"/>
 
         </RelativeLayout>
@@ -38,7 +38,7 @@
                 android:id="@+id/search_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/searchbutton"
+                android:src="@drawable/main_searchbtn"
                 android:layout_centerInParent="true"
                 />
 

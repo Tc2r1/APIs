@@ -55,7 +55,7 @@ public class MovieDetails extends AppCompatActivity {
 			voteCountTV.setText(String.valueOf(currentMovie.getVoteCount()));
 		}
 		if(currentMovie.getRuntime().length() > 0){
-			timeTV.setText(currentMovie.getRuntime() + getString(R.string.minutes));
+			timeTV.setText(currentMovie.getRuntime() + getString(R.string.movie_minutes));
 		}
 		if(currentMovie.getGenres().length() > 0){
 			genreTV.setText(currentMovie.getGenres());
@@ -82,7 +82,7 @@ public class MovieDetails extends AppCompatActivity {
 		Picasso.with(context).load(currentMovie.getBackDropURL())
 						.fit()
 						.centerCrop()
-						.error(R.drawable.placeholder)
+						.error(R.drawable.all_placeholder)
 						.into(backdropIV, new Callback() {
 							@Override
 							public void onSuccess() {
@@ -93,13 +93,13 @@ public class MovieDetails extends AppCompatActivity {
 								Picasso.with(context).load("https://image.tmdb.org/t/p/w780" + currentMovie.getPosterImage())
 												.fit()
 												.centerInside()
-												.error(R.drawable.placeholder)
+												.error(R.drawable.all_placeholder)
 												.into(backdropIV);
 							}
 						});
 		Picasso.with(context).load("https://image.tmdb.org/t/p/w500" + currentMovie.getPosterImage())
 						.fit()
-						.placeholder(R.drawable.placeholder)
+						.placeholder(R.drawable.all_placeholder)
 						.into(posterIV);
 	}
 }

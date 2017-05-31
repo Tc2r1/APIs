@@ -9,38 +9,34 @@
                                     card_view:cardCornerRadius="5dp"
                                     card_view:cardMaxElevation="5dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/avatarIV"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/placeholder"/>
+                android:id="@+id/iv_movie_thumbnail"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/all_placeholder"/>
 
             <TextView
-                android:id="@+id/titleTV"
-                android:layout_width="0dp"
+                android:id="@+id/tv_movie_title"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@id/iv_movie_thumbnail"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/title"
+                android:text="@string/main_title"
                 android:textAppearance="?android:attr/textAppearanceLarge"/>
 
             <TextView
-                android:id="@+id/scoreTV"
-                android:layout_width="wrap_content"
+                android:id="@+id/tv_movie_rating"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:hint="@string/score_hint"
+                android:layout_toRightOf="@id/iv_movie_thumbnail"
+                android:layout_below="@id/tv_movie_title"
+                android:hint="@string/item_movie_ratinghint"
                 android:textAppearance="?android:attr/textAppearanceMedium"/>
-        </LinearLayout>
-    </LinearLayout>
+
+    </RelativeLayout>
 </android.support.v7.widget.CardView>
 

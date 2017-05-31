@@ -50,7 +50,7 @@ public class MovieDataAdapter extends RecyclerView.Adapter<MovieDataAdapter.View
 	@Override
 	public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		// Inflate the viewgroup with an instance of movierow
-		return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.movierow, parent, false));
+		return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_movie, parent, false));
 
 	}
 
@@ -145,7 +145,7 @@ public class MovieDataAdapter extends RecyclerView.Adapter<MovieDataAdapter.View
 										Picasso.with(mainActivity).load(currentObject.getBackDropURL())
 														.fit()
 														.centerCrop()
-														.error(R.drawable.placeholder)
+														.error(R.drawable.all_placeholder)
 														.into(backdropIV, new Callback() {
 															@Override
 															public void onSuccess() {
@@ -158,8 +158,8 @@ public class MovieDataAdapter extends RecyclerView.Adapter<MovieDataAdapter.View
 																Picasso.with(mainActivity).load("https://image.tmdb.org/t/p/w780" + currentObject.getPosterImage())
 																				.fit()
 																				.centerInside()
-																				.error(R.drawable.placeholder)
-																				.placeholder(R.drawable.placeholder)
+																				.error(R.drawable.all_placeholder)
+																				.placeholder(R.drawable.all_placeholder)
 																				.into(backdropIV);
 																paintTextBackground(movieBgLayout, posterIV);
 
@@ -201,12 +201,12 @@ public class MovieDataAdapter extends RecyclerView.Adapter<MovieDataAdapter.View
 				Picasso.with(mainActivity)
 								.load("https://image.tmdb.org/t/p/w500" + currentObject.getPosterImage())
 								.fit()
-								.placeholder(R.drawable.placeholder)
-								.error(R.drawable.placeholder)
+								.placeholder(R.drawable.all_placeholder)
+								.error(R.drawable.all_placeholder)
 								.into(posterIV);
 			} else {
 				// If no image found, use place holder
-				posterIV.setImageResource(R.drawable.placeholder);
+				posterIV.setImageResource(R.drawable.all_placeholder);
 			}
 		}
 	}

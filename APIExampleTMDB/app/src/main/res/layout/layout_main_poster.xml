@@ -7,7 +7,7 @@
         android:id="@+id/poster_iv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/placeholder"
+        android:src="@drawable/all_placeholder"
         android:layout_centerInParent="true"
         />
 </RelativeLayout>

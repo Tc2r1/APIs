@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Craigslist All Search</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fragment_cl_search_title">CL SEARCH</string>
+    <string name="fragment_cl_direct_title">DIRECT SEARCH</string>
+    <string name="fragment_cl_site_title">SITE</string>
+    <string name="fragment_ebay_deal_title">DEAL FINDER</string>
+    <string name="banner_ad_unit_id">ca-app-pub-5213602039222610/</string>
+    <string name="notification_error_ssl_cert_invalid">This Site is not certified.</string>
+</resources>

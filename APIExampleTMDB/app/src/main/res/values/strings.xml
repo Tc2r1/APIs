@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">T.M.D.B. Browser</string>
     <string name="imdb_link">"http://www.imdb.com/title/"</string>
-    <string name="search_button">Search</string>
+    <string name="main_search_btn">Search</string>
     <string name="toolbar_menu_search">Search</string>
     <string name="toolbar_menu_settings">Settings</string>
-    <string name="search_hint">Movie...</string>
-    <string name="end_of_results">End of Results</string>
-    <string name="minutes"> minutes</string>
+    <string name="main_search_hint">Movie...</string>
+    <string name="all_end_results">End of Results</string>
+    <string name="movie_minutes"> minutes</string>
 
     <string name="search_progress_title">Searching</string>
     <string name="search_progress_desc">Searching for titles</string>
